@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTAL RUFIDZ JABAL MERAPI</title>
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #4c8c4a;
+            --accent: #fbc02d;
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --text: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 25px 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            margin-bottom: 12px;
+        }
+
+        .logo-img {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            background-color: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 1.35rem;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-link:active {
+            transform: scale(0.98);
+        }
+
+        .admin-controls {
+            margin-top: 30px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .btn-admin {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .btn-close {
+            background: #d32f2f;
+        }
+
+        .admin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .btn-del {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <!-- URL Google Drive diubah menjadi gambar langsung -->
+            <img class="logo-img" src="https://lh3.googleusercontent.com/d/1RMDNjGgCz2Re_dY0L2hwJAQpo1ufxHSc" alt="Logo Rufidz Jabal Merapi">
+        </div>
+        <h1>PORTAL RUFIDZ JABAL MERAPI</h1>
+        <p>"Mencetak Generasi Emas untuk Membangun Peradaban"</p>
+    </header>
+
+    <main class="menu-container" id="menuList">
+        <!-- List menu dimuat dinamis oleh JavaScript -->
+    </main>
+
+    <div class="admin-controls">
+        <button class="btn-admin" onclick="openLoginModal()">Pengaturan Admin</button>
+    </div>
+
+    <!-- Modal Login Admin -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Login Admin</h2>
+            <input type="password" id="adminPasswordInput" placeholder="Masukkan Password Admin">
+            <button class="btn-action" onclick="verifyPassword()">Masuk</button>
+            <button class="btn-action btn-close" onclick="closeModal('loginModal')">Batal</button>
+        </div>
+    </div>
+
+    <!-- Modal Panel Admin -->
+    <div class="modal" id="adminPanelModal">
+        <div class="modal-content">
+            <h2>Kelola Link Akses</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <h3>Tambah Menu Baru</h3>
+                <input type="text" id="newTitle" placeholder="Nama Layanan/Fitur">
+                <input type="url" id="newUrl" placeholder="https://script.google.com/...">
+                <button class="btn-action" onclick="addLink()">Tambah Link</button>
+            </div>
+
+            <hr style="margin: 15px 0;">
+
+            <h3>Daftar Link Aktif</h3>
+            <div id="adminMenuList" style="margin-top: 10px;"></div>
+
+            <hr style="margin: 15px 0;">
+
+            <button class="btn-action btn-close" onclick="closeModal('adminPanelModal')">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        // Data default link utama
+        const defaultLinks = [
+            {
+                id: "1",
+                title: "Kepengasuhan RJM",
+                url: "https://script.google.com/macros/s/AKfycbyLWt5ViTYKUVFg4bTkzlD4my2-m1A-4g8zpDebEQ1jUJAQBQzLxHqTgz5Xbh0V-1CYbw/exec"
+            },
+            {
+                id: "2",
+                title: "Tahfidzul Qur'an RJM",
+                url: "https://script.google.com/macros/s/AKfycbxP-bCY-Dy_kSRzhvKk0Gycqf64S13t5W0g2y6glqh0U7pRteFCLQramP6D5YQFCZlh/exec"
+            },
+            {
+                id: "3",
+                title: "Keuangan / Donasi RJM",
+                url: "https://script.google.com/macros/s/AKfycbz9IUL_UrPL7V3mAjckeWSTPRY6aXW-ZlyyeYSZSgQ93T_f45tJAEBMvBtV90yxXN8Mbg/exec"
+            }
+        ];
+
+        // Password Admin (Bisa Anda sesuaikan)
+        const ADMIN_PASSWORD = "mms456";
+
+        // Inisialisasi Data dari LocalStorage
+        function getLinks() {
+            const saved = localStorage.getItem('rjm_links');
+            if (!saved) {
+                localStorage.setItem('rjm_links', JSON.stringify(defaultLinks));
+                return defaultLinks;
+            }
+            return JSON.parse(saved);
+        }
+
+        // Render Menu Tampilan Utama
+        function renderMenu() {
+            const links = getLinks();
+            const container = document.getElementById('menuList');
+            container.innerHTML = '';
+
+            links.forEach(item => {
+                const a = document.createElement('a');
+                a.className = 'btn-link';
+                a.href = item.url;
+                a.target = '_blank';
+                a.innerHTML = `<span>${item.title}</span> <span>➔</span>`;
+                container.appendChild(a);
+            });
+        }
+
+        // Fungsi Modal
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function verifyPassword() {
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === ADMIN_PASSWORD) {
+                document.getElementById('adminPasswordInput').value = '';
+                closeModal('loginModal');
+                openAdminPanel();
+            } else {
+                alert('Password salah!');
+            }
+        }
+
+        // Panel Admin
+        function openAdminPanel() {
+            document.getElementById('adminPanelModal').style.display = 'flex';
+            renderAdminList();
+        }
+
+        function renderAdminList() {
+            const links = getLinks();
+            const container = document.getElementById('adminMenuList');
+            container.innerHTML = '';
+
+            links.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'admin-item';
+                div.innerHTML = `
+                    <span><strong>${item.title}</strong></span>
+                    <button class="btn-del" onclick="deleteLink('${item.id}')">Hapus</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Tambah Link Baru
+        function addLink() {
+            const title = document.getElementById('newTitle').value.trim();
+            const url = document.getElementById('newUrl').value.trim();
+
+            if (!title || !url) {
+                alert('Harap isi nama menu dan link URL.');
+                return;
+            }
+
+            const links = getLinks();
+            links.push({
+                id: Date.now().toString(),
+                title: title,
+                url: url
+            });
+
+            localStorage.setItem('rjm_links', JSON.stringify(links));
+            document.getElementById('newTitle').value = '';
+            document.getElementById('newUrl').value = '';
+            
+            renderMenu();
+            renderAdminList();
+        }
+
+        // Hapus Link
+        function deleteLink(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus link ini?')) {
+                let links = getLinks();
+                links = links.filter(item => item.id !== id);
+                localStorage.setItem('rjm_links', JSON.stringify(links));
+                renderMenu();
+                renderAdminList();
+            }
+        }
+
+        // Jalankan render awal saat dibuka
+        renderMenu();
+    </script>
+</body>
+</html>
