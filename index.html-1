@@ -1,369 +1,355 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PORTAL RUFIDZ JABAL MERAPI</title>
+    <base target="_top">
+    <!-- 1. Menambahkan link font Poppins dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1b5e20;
-            --primary-light: #4c8c4a;
-            --accent: #fbc02d;
-            --bg: #f4f6f8;
-            --card-bg: #ffffff;
-            --text: #333333;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 25px;
-            padding: 25px 20px;
-            background: var(--primary);
-            color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .logo-container {
-            margin-bottom: 12px;
-        }
-
-        .logo-img {
-            width: 85px;
-            height: 85px;
-            object-fit: contain;
-            background-color: white;
-            border-radius: 50%;
-            padding: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        header h1 {
-            font-size: 1.35rem;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        header p {
-            font-size: 0.85rem;
-            opacity: 0.95;
-            font-style: italic;
-            font-weight: 300;
-        }
-
-        .menu-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .btn-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--card-bg);
-            padding: 16px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--primary);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-link:active {
-            transform: scale(0.98);
-        }
-
-        .admin-controls {
-            margin-top: 30px;
-            text-align: center;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
-
-        .btn-admin {
-            background: #444;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 450px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-content h2 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-
-        .btn-action {
-            width: 100%;
-            padding: 10px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 8px;
-        }
-
-        .btn-close {
-            background: #d32f2f;
-        }
-
-        .admin-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f9f9f9;
-            padding: 8px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-        }
-
-        .btn-del {
-            background: #d32f2f;
-            color: white;
-            border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            cursor: pointer;
+        /* 2. Mengubah font-family menjadi 'Poppins' */
+        body { background-color: #f4f7f6; font-family: 'Poppins', sans-serif; padding: 20px;}
+        
+        .kop-surat { text-align: center; border-bottom: 3px solid #2c3e50; padding-bottom: 15px; margin-bottom: 20px; }
+        .hidden { display: none !important; }
+        .card { box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .logo-img { max-height: 90px; margin-bottom: 10px; }
+        @media print {
+            .no-print { display: none !important; }
         }
     </style>
 </head>
+</head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <!-- URL Google Drive diubah menjadi gambar langsung -->
-            <img class="logo-img" src="https://lh3.googleusercontent.com/d/1RMDNjGgCz2Re_dY0L2hwJAQpo1ufxHSc" alt="Logo Rufidz Jabal Merapi">
-        </div>
-        <h1>PORTAL RUFIDZ JABAL MERAPI</h1>
-        <p>"Mencetak Generasi Emas untuk Membangun Peradaban"</p>
-    </header>
-
-    <main class="menu-container" id="menuList">
-        <!-- List menu dimuat dinamis oleh JavaScript -->
-    </main>
-
-    <div class="admin-controls">
-        <button class="btn-admin" onclick="openLoginModal()">Pengaturan Admin</button>
-    </div>
-
-    <!-- Modal Login Admin -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <h2>Login Admin</h2>
-            <input type="password" id="adminPasswordInput" placeholder="Masukkan Password Admin">
-            <button class="btn-action" onclick="verifyPassword()">Masuk</button>
-            <button class="btn-action btn-close" onclick="closeModal('loginModal')">Batal</button>
+<!-- HALAMAN LOGIN -->
+<div id="login-container" class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card p-4 text-center">
+                <img src="https://drive.google.com/thumbnail?id=1RMDNjGgCz2Re_dY0L2hwJAQpo1ufxHSc&sz=w400" alt="Logo Rufidz" class="logo-img mx-auto">
+                <h4 class="text-success fw-bold mt-2">Rufidz Jabal Merapi</h4>
+                <p class="small text-muted">Aplikasi Rekap Keuangan & Donasi</p>
+                <input type="password" id="passwordInput" class="form-control mb-3" placeholder="Masukkan Password/Kode Akses...">
+                <button onclick="login()" class="btn btn-success w-100">Login</button>
+                <div id="login-error" class="text-danger mt-2 hidden">Password salah!</div>
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Modal Panel Admin -->
-    <div class="modal" id="adminPanelModal">
-        <div class="modal-content">
-            <h2>Kelola Link Akses</h2>
-            
-            <div style="margin-bottom: 20px;">
-                <h3>Tambah Menu Baru</h3>
-                <input type="text" id="newTitle" placeholder="Nama Layanan/Fitur">
-                <input type="url" id="newUrl" placeholder="https://script.google.com/...">
-                <button class="btn-action" onclick="addLink()">Tambah Link</button>
+<!-- HALAMAN UTAMA APLIKASI -->
+<div id="app-container" class="container hidden">
+    <div class="kop-surat">
+        <img src="https://drive.google.com/thumbnail?id=1RMDNjGgCz2Re_dY0L2hwJAQpo1ufxHSc&sz=w400" alt="Logo Rufidz" class="logo-img mx-auto">
+        <h3 class="fw-bold">RUFIDZ JABAL MERAPI</h3>
+        <p class="mb-0 text-muted small">Dn. Gowok, Ds. Sengi, Kec. Dukun, Kab. Magelang</p>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3 no-print">
+        <div>
+            User: <strong id="user-name-display" class="text-success"></strong> 
+            <span id="user-role-badge" class="badge bg-secondary ms-2"></span>
+        </div>
+        <div>
+            <button onclick="window.print()" class="btn btn-secondary btn-sm admin-viewer-only">Cetak PDF</button>
+            <button onclick="location.reload()" class="btn btn-danger btn-sm">Logout</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- FORM ADMIN -->
+        <div class="col-md-4 admin-only no-print">
+            <div class="card p-3 mb-3">
+                <h5>Input Keuangan</h5>
+                <form id="formKeuangan" onsubmit="simpanKeuangan(event)">
+                    <select id="jenis" class="form-select mb-2" onchange="togglePos()">
+                        <option value="Masuk">Uang Masuk</option>
+                        <option value="Keluar">Pengeluaran</option>
+                    </select>
+                    <select id="pos" class="form-select mb-2 hidden">
+                        <option value="01. Mukafaah Ustadz/ Pengajar">01. Mukafaah Ustadz</option>
+                        <option value="02. Sarana & Prasarana Pengajaran">02. Sarpras Pengajaran</option>
+                        <option value="03. Kegiatan Dakwah/ Sosial">03. Kegiatan Dakwah-Sosial</option>
+                        <option value="04. Sarana & Prasarana Dakwah">04. Sarpras Dakwah</option>
+                        <option value="05. Belanja Dapur">05. Belanja Dapur</option>
+                        <option value="06. Uang Saku Anak Yatim">06. Uang Saku Yatim</option>
+                        <option value="07. Kegiatan Tambahan/ Ekstra">07. Kegiatan Ekstra</option>
+                    </select>
+                    <input type="number" id="nominal" class="form-control mb-2" placeholder="Nominal (Rp)" required>
+                    <input type="text" id="keterangan" class="form-control mb-2" placeholder="Keterangan" required>
+                    
+                    <label class="small text-muted mt-2">Unggah Bukti (Opsional)</label>
+                    <input type="file" id="buktiKeuangan" accept="image/*" capture="environment" class="form-control mb-2">
+                    
+                    <button type="submit" id="btnSimpanKeuangan" class="btn btn-primary w-100">Simpan Data</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FORM WALISANTRI -->
+        <div class="col-md-4 wali-only no-print hidden">
+            <div class="card p-3 mb-3">
+                <h5>Konfirmasi Donasi</h5>
+                <form id="formDonasi" onsubmit="simpanDonasi(event)">
+                    <select id="jenisDonasi" class="form-select mb-2">
+                        <option value="Uang">Uang</option>
+                        <option value="Barang">Barang</option>
+                    </select>
+                    <input type="text" id="detailDonasi" class="form-control mb-2" placeholder="Cth: 500000 atau Beras 10Kg" required>
+                    
+                    <label class="small text-muted mt-2">Unggah Bukti (Opsional)</label>
+                    <input type="file" id="buktiDonasi" accept="image/*" class="form-control mb-2">
+                    
+                    <button type="submit" id="btnSimpanDonasi" class="btn btn-success w-100">Kirim Konfirmasi</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TABEL REKAP -->
+        <div class="col-md-8" id="tabel-container">
+            <div class="card p-3 admin-viewer-only mb-3">
+                <h5>Buku Kas Yayasan</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-center">
+                        <thead class="table-light">
+                            <!-- Ditambahkan kolom Bukti -->
+                            <tr><th>Tgl</th><th>Tipe</th><th>Pos / Ket</th><th>Masuk</th><th>Keluar</th><th>Bukti</th></tr>
+                        </thead>
+                        <tbody id="tabelKas"><tr><td colspan="6">Memuat data...</td></tr></tbody>
+                    </table>
+                </div>
             </div>
 
-            <hr style="margin: 15px 0;">
-
-            <h3>Daftar Link Aktif</h3>
-            <div id="adminMenuList" style="margin-top: 10px;"></div>
-
-            <hr style="margin: 15px 0;">
-
-            <button class="btn-action btn-close" onclick="closeModal('adminPanelModal')">Tutup</button>
+            <div class="card p-3 mt-2">
+                <h5>Riwayat Donasi Walisantri</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm text-center">
+                        <thead class="table-light">
+                            <!-- Ditambahkan kolom Bukti -->
+                            <tr><th>Tgl</th><th>Santri</th><th>Jenis</th><th>Detail</th><th>Bukti</th></tr>
+                        </thead>
+                        <tbody id="tabelDonasi"><tr><td colspan="5">Memuat data...</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <script>
-        // Data default link utama
-        const defaultLinks = [
-            {
-                id: "1",
-                title: "Kepengasuhan RJM",
-                url: "https://script.google.com/macros/s/AKfycbyLWt5ViTYKUVFg4bTkzlD4my2-m1A-4g8zpDebEQ1jUJAQBQzLxHqTgz5Xbh0V-1CYbw/exec"
-            },
-            {
-                id: "2",
-                title: "Tahfidz Al-Qur'an RJM",
-                url: "https://script.google.com/macros/s/AKfycbwW3CYhSr4Til4l5wZ87Xdt5vULdyAwAuADo5Sl13z1Y54x3YKcSHcmNc-wvnnSZZyDFg/exec"
-            },
-            {
-                id: "3",
-                title: "Keuangan / Donasi RJM",
-                url: "https://script.google.com/macros/s/AKfycbz9IUL_UrPL7V3mAjckeWSTPRY6aXW-ZlyyeYSZSgQ93T_f45tJAEBMvBtV90yxXN8Mbg/exec"
-            }
-        ];
+<script>
+    const users = {
+        "bdr456": { role: "admin", name: "Pengasuh & Bendahara" },
+        "yysrjm789": { role: "viewer", name: "Asatidzah & Yayasan" },
+        "derren@1": { role: "wali", name: "Derren Muhammad Zalata" },
+        "rasyid@2": { role: "wali", name: "Ibrahim Rasyid" },
+        "ibrahim@3": { role: "wali", name: "Ibrahim Al Fatih" },
+        "haidar@4": { role: "wali", name: "Haidar Fahmi Arsyad" },
+        "hilmy@5": { role: "wali", name: "Muhammad Hilmy Fauzan" },
+        "yazid@6": { role: "wali", name: "Hafidz Yazid Hamizan" },
+        "wildan@7": { role: "wali", name: "Wildan Azka Mubarak" },
+        "ahsan@8" : { role: "wali", name: "Izzudin Ahsan Junda Tristanto"},
+        "hamzah@9" : { role: "wali", name: "Hamzah Syahdan Al-Atsari"},
+        "harun@10" : { role: "wali", name: "Harun Nuzhmi Almiqdad"},
+        "faruqi@11" : { role: "wali", name: "Ahmad Faruqi Al-Farros"},
+        "nafi@12" : { role: "wali", name: "Muhammad Nafi'"},
+        "syafiq@13" : { role: "wali", name: "Syafiq Ibrahim"},
+        "sulaim@14" : { role: "wali", name: "Muusa Sulaim"},
+        "juna@15" : { role: "wali", name: "Juna"},
+        "azriel@16" : { role: "wali", name: "Azriel Hafizh Alfarezi"},
+        "ahnaf@17" : { role: "wali", name: "Ahnaf Rausyanfikr Rozaqi"},
+        "muadz@18" : { role: "wali", name: "Mu'adz"},
+        "thoriq@19" : { role: "wali", name: "Thoriq Abdul Azmi"},
+        "musa@20" : { role: "wali", name: "Musa"},
+    };
 
-        // Password Admin (Bisa Anda sesuaikan)
-        const ADMIN_PASSWORD = "mms456";
+    let currentUser = null;
 
-        // Inisialisasi Data dari LocalStorage
-        function getLinks() {
-            const saved = localStorage.getItem('rjm_links');
-            if (!saved) {
-                localStorage.setItem('rjm_links', JSON.stringify(defaultLinks));
-                return defaultLinks;
-            }
-            return JSON.parse(saved);
+    function login() {
+        const pass = document.getElementById("passwordInput").value;
+        if (users[pass]) {
+            currentUser = users[pass];
+            document.getElementById("login-error").classList.add("hidden");
+            document.getElementById("login-container").classList.add("hidden");
+            document.getElementById("app-container").classList.remove("hidden");
+            
+            document.getElementById("user-name-display").innerText = currentUser.name;
+            document.getElementById("user-role-badge").innerText = currentUser.role.toUpperCase();
+            
+            aturTampilan();
+            muatDataDariServer();
+        } else {
+            document.getElementById("login-error").classList.remove("hidden");
         }
+    }
 
-        // Render Menu Tampilan Utama
-        function renderMenu() {
-            const links = getLinks();
-            const container = document.getElementById('menuList');
-            container.innerHTML = '';
-
-            links.forEach(item => {
-                const a = document.createElement('a');
-                a.className = 'btn-link';
-                a.href = item.url;
-                a.target = '_blank';
-                a.innerHTML = `<span>${item.title}</span> <span>➔</span>`;
-                container.appendChild(a);
-            });
+    function aturTampilan() {
+        document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.wali-only').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.admin-viewer-only').forEach(el => el.classList.add('hidden'));
+        
+        let container = document.getElementById('tabel-container');
+        if (currentUser.role === 'admin') {
+            document.querySelectorAll('.admin-only, .admin-viewer-only').forEach(el => el.classList.remove('hidden'));
+            container.className = "col-md-8";
+        } else if (currentUser.role === 'viewer') {
+            document.querySelectorAll('.admin-viewer-only').forEach(el => el.classList.remove('hidden'));
+            container.className = "col-md-12";
+        } else if (currentUser.role === 'wali') {
+            document.querySelectorAll('.wali-only').forEach(el => el.classList.remove('hidden'));
+            container.className = "col-md-8";
         }
+    }
 
-        // Fungsi Modal
-        function openLoginModal() {
-            document.getElementById('loginModal').style.display = 'flex';
-        }
+    function togglePos() {
+        const jenis = document.getElementById("jenis").value;
+        document.getElementById("pos").classList.toggle("hidden", jenis !== "Keluar");
+    }
 
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        function verifyPassword() {
-            const pass = document.getElementById('adminPasswordInput').value;
-            if (pass === ADMIN_PASSWORD) {
-                document.getElementById('adminPasswordInput').value = '';
-                closeModal('loginModal');
-                openAdminPanel();
-            } else {
-                alert('Password salah!');
-            }
-        }
-
-        // Panel Admin
-        function openAdminPanel() {
-            document.getElementById('adminPanelModal').style.display = 'flex';
-            renderAdminList();
-        }
-
-        function renderAdminList() {
-            const links = getLinks();
-            const container = document.getElementById('adminMenuList');
-            container.innerHTML = '';
-
-            links.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'admin-item';
-                div.innerHTML = `
-                    <span><strong>${item.title}</strong></span>
-                    <button class="btn-del" onclick="deleteLink('${item.id}')">Hapus</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Tambah Link Baru
-        function addLink() {
-            const title = document.getElementById('newTitle').value.trim();
-            const url = document.getElementById('newUrl').value.trim();
-
-            if (!title || !url) {
-                alert('Harap isi nama menu dan link URL.');
+    // Fungsi mengubah foto menjadi Base64 (Teks)
+    function ambilDataFile(inputId) {
+        return new Promise((resolve, reject) => {
+            const file = document.getElementById(inputId).files[0];
+            if (!file) {
+                resolve(null); // Jika tidak ada foto
                 return;
             }
-
-            const links = getLinks();
-            links.push({
-                id: Date.now().toString(),
-                title: title,
-                url: url
-            });
-
-            localStorage.setItem('rjm_links', JSON.stringify(links));
-            document.getElementById('newTitle').value = '';
-            document.getElementById('newUrl').value = '';
             
-            renderMenu();
-            renderAdminList();
-        }
-
-        // Hapus Link
-        function deleteLink(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus link ini?')) {
-                let links = getLinks();
-                links = links.filter(item => item.id !== id);
-                localStorage.setItem('rjm_links', JSON.stringify(links));
-                renderMenu();
-                renderAdminList();
+            if (file.size > 3 * 1024 * 1024) {
+                alert("Ukuran foto terlalu besar (Lebih dari 3MB). Proses akan memakan waktu sedikit lebih lama.");
             }
-        }
 
-        // Jalankan render awal saat dibuka
-        renderMenu();
-    </script>
+            const reader = new FileReader();
+            reader.onload = () => resolve({
+                base64: reader.result,
+                name: file.name,
+                mimeType: file.type
+            });
+            reader.onerror = error => reject(error);
+            reader.readAsDataURL(file);
+        });
+    }
+
+    // Fungsi Simpan Keuangan Admin
+    async function simpanKeuangan(e) {
+        e.preventDefault();
+        const btn = document.getElementById("btnSimpanKeuangan");
+        btn.innerText = "Mengunggah & Menyimpan... (Harap Tunggu)";
+        btn.disabled = true;
+        
+        try {
+            const jenis = document.getElementById("jenis").value;
+            const pos = document.getElementById("pos").value;
+            const nom = document.getElementById("nominal").value;
+            const ket = document.getElementById("keterangan").value;
+            
+            let fileData = await ambilDataFile("buktiKeuangan"); 
+            
+            google.script.run
+                .withSuccessHandler(() => {
+                    document.getElementById("formKeuangan").reset();
+                    btn.innerText = "Simpan Data";
+                    btn.disabled = false;
+                    togglePos();
+                    muatDataDariServer();
+                    alert("Data & Foto Berhasil Disimpan!");
+                })
+                .withFailureHandler((error) => {
+                    alert("Gagal menyimpan: " + error.message);
+                    btn.innerText = "Simpan Data";
+                    btn.disabled = false;
+                })
+                .simpanDataKeuangan(jenis, pos, nom, ket, fileData);
+        } catch (error) {
+            btn.innerText = "Simpan Data";
+            btn.disabled = false;
+        }
+    }
+
+    // Fungsi Simpan Donasi Walisantri
+    async function simpanDonasi(e) {
+        e.preventDefault();
+        const btn = document.getElementById("btnSimpanDonasi");
+        btn.innerText = "Mengunggah & Menyimpan... (Harap Tunggu)";
+        btn.disabled = true;
+        
+        try {
+            const jenis = document.getElementById("jenisDonasi").value;
+            const detail = document.getElementById("detailDonasi").value;
+            
+            let fileData = await ambilDataFile("buktiDonasi");
+            
+            google.script.run
+                .withSuccessHandler(() => {
+                    document.getElementById("formDonasi").reset();
+                    btn.innerText = "Kirim Konfirmasi";
+                    btn.disabled = false;
+                    muatDataDariServer();
+                    alert("Konfirmasi Donasi & Foto Terkirim!");
+                })
+                .withFailureHandler((error) => {
+                    alert("Gagal mengirim: " + error.message);
+                    btn.innerText = "Kirim Konfirmasi";
+                    btn.disabled = false;
+                })
+                .simpanDataDonasi(currentUser.name, jenis, detail, fileData);
+        } catch (error) {
+            btn.innerText = "Kirim Konfirmasi";
+            btn.disabled = false;
+        }
+    }
+
+    // Menarik data tabel dari Server
+    function muatDataDariServer() {
+        google.script.run
+            .withSuccessHandler(tampilkanTabel)
+            .withFailureHandler((error) => {
+                document.getElementById("tabelKas").innerHTML = `<tr><td colspan='6' class='text-danger'>Error: ${error.message}</td></tr>`;
+            })
+            .ambilData();
+    }
+
+    function formatRp(angka) {
+        if(angka == 0 || angka == "" || isNaN(angka)) return "-";
+        return "Rp " + parseInt(angka).toLocaleString('id-ID');
+    }
+
+    function tampilkanTabel(data) {
+        let htmlKas = "";
+        let htmlDonasi = "";
+
+        data.forEach(row => {
+            if (!row[0] || row[0].trim() === "") return; // Abaikan baris kosong
+            
+            // Format link bukti jadi tombol
+            let linkBukti = row[8] && row[8] !== "-" && row[8].startsWith("http") 
+                            ? `<a href="${row[8]}" target="_blank" class="btn btn-sm btn-info text-white">Lihat</a>` 
+                            : "-";
+
+            if(row[1] !== "Donasi Walisantri") {
+                let gabungKet = row[2] !== "-" ? `<b>${row[2]}</b><br>${row[5]}` : row[5];
+                htmlKas += `<tr>
+                    <td>${row[0]}</td>
+                    <td>${row[1]}</td>
+                    <td>${gabungKet}</td>
+                    <td class="text-success">${formatRp(row[6])}</td>
+                    <td class="text-danger">${formatRp(row[7])}</td>
+                    <td>${linkBukti}</td>
+                </tr>`;
+            } else {
+                htmlDonasi += `<tr>
+                    <td>${row[0]}</td>
+                    <td>${row[3]}</td>
+                    <td>${row[4]}</td>
+                    <td>${row[5]}</td>
+                    <td>${linkBukti}</td>
+                </tr>`;
+            }
+        });
+
+        document.getElementById("tabelKas").innerHTML = htmlKas || "<tr><td colspan='6'>Belum ada data</td></tr>";
+        document.getElementById("tabelDonasi").innerHTML = htmlDonasi || "<tr><td colspan='5'>Belum ada data</td></tr>";
+    }
+</script>
 </body>
 </html>
